@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Login</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-    <body>
-     <header>
-        <div id="head"> 
-        </div>
-        <div id="nav">
-        </div>
-     </header>
 
-  
         <div></div>
         <form  class="wrap_log" action="" method="post">
         <div id="cabecera">
@@ -33,6 +19,3 @@
         </div>
         </section>
         </form>
-   
-    </body>
-</html>

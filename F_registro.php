@@ -3,6 +3,8 @@
 include_once 'F_validar.php';
 require_once 'Usuario.php';
 $vista_form = 'Registrarse.php';
+$vista_header= 'header.php';
+$vista_footer= 'footer.php';
 
 
 if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
@@ -20,8 +22,8 @@ if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
         $sql = "SELECT * FROM `usuario` WHERE `email`='$email'";
         if($conn->query($sql)){
             if($conn->affected_rows == 0) {
-                $sql = "INSERT INTO `usuario` (name, password, email,rol_id)
-                     VALUES ($user', '$pass','$email' ,'$rol')";
+                $sql = 'INSERT INTO `usuario` (name,password,email,rol_id)
+                     VALUES ("'.$user.'","'.$pass.'","'.$email.'","'.$rol.'")';
 
                 if ($conn->query($sql) === TRUE) {
 
@@ -56,4 +58,6 @@ if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
 }else{
     $errorcheck="Falta aceptar las condiciones";
 }
+require_once $vista_header;
 require_once $vista_form;
+require_once $vista_footer;

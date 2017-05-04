@@ -2,13 +2,11 @@
 require_once 'F_validar.php';
 require_once 'Usuario.php';
 session_start();
-setcookie('visita',0,time()+3600);
     $vista_Login= 'home.php';
+    $vista_header= 'header.php';
+    $vista_footer= 'footer.php';
 
 
-if(isset($_POST['f_registro'])){
-    header("Location: F_registro.php");
-}else{
 if(isset($_POST['Logearse'])){
         $email      = (isset($_POST['email'])) ? $_POST['email'] : null;
         $password   = (isset($_POST['pass'])) ? $_POST['pass']  : null;
@@ -25,7 +23,7 @@ if($valido->validarLogin($email,$password)){
     $resultado=$conn->query($sql);
     $fila=$resultado->fetch_array();
   
-    if($fila[1]==$pass){
+    if($fila[2]==$pass){
 
         $loged = new Usuario();
         $loged->setid($fila[0]);
@@ -39,8 +37,7 @@ if($valido->validarLogin($email,$password)){
         $_SESSION["usu_reg"][]=$loged->getmail();
         $_SESSION["usu_reg"][]=$loged->getrol();
         if (! empty($_SESSION["usu_reg"])){
-          
-            $vista_Login = 'home_cliente.php';
+             header("Location: home_cliente.php");
         }
         }else{
 
@@ -63,5 +60,7 @@ if($valido->validarLogin($email,$password)){
 }
 
 }
-}
- require_once $vista_Login;
+
+require_once $vista_header;
+require_once $vista_Login;
+require_once $vista_footer;
