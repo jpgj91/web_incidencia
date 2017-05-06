@@ -125,22 +125,7 @@ position: relative;
 	height: auto;
 	overflow: hidden;
 }
-
-/*HOME  iniciados*/
-#head {
-    top: 0;
-    margin: 0 auto;
-    width: 100%;
-    height: 70px;
-    background: #ADD8E6;    
-}
-#logo{
-  width: 50%;
-  height: 60px;
-  background-image: url(img/logo.png);
-  background-repeat: no-repeat;
-  float: left;
-}
+/*nav*/
 #nav{
   top: 0;
   margin: 0 auto;
@@ -149,7 +134,7 @@ position: relative;
   background: green; 
 }
 
-/**/
+
 ul {
     background-color: #333;
     float: left;
@@ -179,11 +164,29 @@ li a:hover:not(.active) {
 .active {
     background-color: #4CAF50;
 }
-#fecha{
-    float: left;
-    margin: 48px 1px 1px 684px;
-    width: 14%;
+/*header*/
+
+#head {
+    top: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 70px;
+    background: #ADD8E6;    
 }
+#logo{
+  width: 50%;
+  height: 60px;
+  background-image: url(img/logo.png);
+  background-repeat: no-repeat;
+  float: left;
+}
+.usuario,.fecha{
+  width: 50%;
+  height: 30px;
+  float: right;
+  text-align: right;
+}
+/*Footer*/
 #wrap_piepag{
    position:absolute;
    bottom:0;
@@ -191,4 +194,17 @@ li a:hover:not(.active) {
    left: 0;
    height:30px;   /* Height of the footer */
    background:red;
+}
+
+/*cerrar incidencia cliente*/
+#wrap_tabla{
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+#cerrar_inc_cliente{
+  width: 100%;
+}
+#cliente_id,#cliente_est{
+  width: 5%;
 }

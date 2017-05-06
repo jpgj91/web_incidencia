@@ -1,10 +1,10 @@
 <?php
 
-include_once 'F_validar.php';
-require_once 'Usuario.php';
-$vista_form = 'Registrarse.php';
-$vista_header= 'header.php';
-$vista_footer= 'footer.php';
+include_once 'class/F_validar.php';
+require_once 'class/Usuario.php';
+$vista_form = 'view/Registrarse.php';
+$vista_header= 'view/header.php';
+$vista_footer= 'view/footer.php';
 
 
 if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
@@ -32,7 +32,7 @@ if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
                 }
 
                 $conn->close();
-                header("Location: home_cliente.php");
+                header("Location: incidencias_cliente.php");
             }else {
                 $emailErr = 'Email ya existe.';
                 $vista_form = 'Registrarse.php';
@@ -50,7 +50,7 @@ if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
         $usuvacio     = isset($valido->error_user)  ? $valido->error_user  : null;
         $emailErr     = isset($valido->error_mail)  ? $valido->error_mail  : null;
 
-            $vista_form = 'Registrarse.php';
+            $vista_form = 'registro.php';
     }
 
 

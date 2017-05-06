@@ -206,7 +206,21 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
+-- -----------------------------------------------------
+-- Table `rol`
+-- -----------------------------------------------------
 INSERT INTO `rol`(`name`) VALUES ("Cliente");
 INSERT INTO `rol`(`name`) VALUES ("Jefe Proyecto");
 INSERT INTO `rol`(`name`) VALUES ("Programador");
+-- -----------------------------------------------------
+-- Table `estado`
+-- -----------------------------------------------------
+INSERT INTO `estado`(`name`) VALUES ('en epera');
+INSERT INTO `estado`(`name`) VALUES ('en proceso');
+INSERT INTO `estado`(`name`) VALUES ('cerrado');
+-- -----------------------------------------------------
+-- Table `prioridad`
+-- -----------------------------------------------------
+INSERT INTO `prioridad`(`name`) VALUES ('Alta');
+INSERT INTO `prioridad`(`name`) VALUES ('media');
+INSERT INTO `prioridad`(`name`) VALUES ('baja');

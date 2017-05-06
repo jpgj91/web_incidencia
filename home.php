@@ -1,21 +1,66 @@
+<?php
+require_once 'class/F_validar.php';
+require_once 'class/Usuario.php';
+session_start();
+    $vista_Login= 'view/home.php';
+    $vista_header= 'view/header.php';
+    $vista_footer= 'view/footer.php';
 
-        <div></div>
-        <form  class="wrap_log" action="" method="post">
-        <div id="cabecera">
-            <header>Login</header>
-        </div>
-        <section id="login_txt">
-        <div id="login_txt_usu">
-            <label>E-mail</label><input type="text" name="email">
-             <span class="error"><?php echo (isset($Usuerror)) ? $Usuerror : '';?><?php echo (isset($usuarioerr)) ? $usuarioerr : '';?></span>
-        </div>
-        <div id="login_txt_pass">
-            <label>Password</label><input type="password" name="pass">
-             <span class="error"><?php echo (isset($passerr)) ? $passerr : '';?></span>
-        </div>
-        <div id="login_btn">
-            <input  class="btn" type="submit" value="Logearse" name="Logearse">
-            <a href="F_registro.php" class="btn"  name="Login" >Registrarse</a>
-        </div>
-        </section>
-        </form>
+
+if(isset($_POST['Logearse'])){
+        $email      = (isset($_POST['email'])) ? $_POST['email'] : null;
+        $password   = (isset($_POST['pass'])) ? $_POST['pass']  : null;
+
+
+    $valido = new Validar;
+
+
+if($valido->validarLogin($email,$password)){
+
+    $pass=md5($password);
+    $conn = new mysqli('localhost', 'root', '','incidencias');
+    $sql = "SELECT * FROM `usuario` WHERE `email`='$email'";
+    $resultado=$conn->query($sql);
+    $fila=$resultado->fetch_array();
+  
+    if($fila[2]==$pass){
+
+        $loged = new Usuario();
+        $loged->setid($fila[0]);
+        $loged->setname($fila[1]);
+        $loged->setpass($fila[3]);
+        $loged->setmail($fila[2]);
+        $loged->setrol($fila[4]);
+        $_SESSION["usu_reg"][]=$loged->getid();
+        $_SESSION["usu_reg"][]=$loged->getname();
+        $_SESSION["usu_reg"][]=$loged->getpass();
+        $_SESSION["usu_reg"][]=$loged->getmail();
+        $_SESSION["usu_reg"][]=$loged->getrol();
+        if (! empty($_SESSION["usu_reg"])){
+             header("Location: incidencias_cliente.php");
+        }
+        }else{
+
+        if(!empty($emailerror)){
+
+        }else{
+        $usuarioerr="El mail o contraseña no existe";
+
+
+
+        }
+    }
+    $conn->close();
+}else{
+
+
+    $Usuerror  = isset($valido->error_user)  ? $valido->error_user  : null;
+    $passerr    = isset($valido->error_clave) ? $valido->error_clave : null ;
+
+}
+
+}
+
+require_once $vista_header;
+require_once $vista_Login;
+require_once $vista_footer;

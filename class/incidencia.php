@@ -14,6 +14,7 @@ class Incidencia {
     private $estado;
     private $assignado;
     private $reportado;
+    private $fecha;
 
 
 
@@ -39,6 +40,9 @@ class Incidencia {
     function getreportado() {
         return $this -> reportado;
     }
+     function getfecha() {
+        return $this -> fecha;
+    }
 
     function setid($id) {
         $this -> id = $id;
@@ -49,17 +53,20 @@ class Incidencia {
     function setassunto($asunto) {
         $this -> asunto = $asunto;
     }
-    function setmail($prioridad) {
+    function setprioridad($prioridad) {
         $this -> prioridad = $prioridad;
     }
-    function setrestadol($estado) {
+    function setrestado($estado) {
         $this -> estado = $estado;
     }
-    function setrol($assignado) {
+    function setassignado($assignado) {
         $this -> assignado = $assignado;
     }
-    function setrol($reportado) {
+    function setreportado($reportado) {
         $this -> reportado = $reportado;
+    }
+    function setfecha($fecha) {
+        $this -> fecha = $fecha;
     }
 
 }
