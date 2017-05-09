@@ -17,12 +17,12 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` where `reportador_usuario_id` ='$user'";
+    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id` where `incidencia`.`reportador_usuario_id` ='$user'";
 
     $resultado=$conn->query($sql);
-    
+    var_dump($resultado);
     $nfilas = $resultado->num_rows;
-    
+
     $conn->close();
  
         echo "
@@ -33,7 +33,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             <th>asunto</th>
             <th>prioridad</th>
             <th>estado</th>
-            <th>assinado</th>
+            <th>assignado</th>
             <th>reportador</th>
             <th>fecha</th>
         </tr>";
@@ -44,12 +44,12 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                 for ($i=0; $i<$nfilas; $i++){
                  $fila=$resultado->fetch_array();
                  $inc = new Incidencia();
-
+            echo '<pre>' . var_export($fila, true) . '</pre>';
             $inc -> setid($fila[0]);
             $inc -> setdescription($fila[1]);
             $inc -> setassunto($fila[2]);
-            $inc -> setprioridad($fila[3]);
-            $inc-> setrestado($fila[4]);
+            $inc -> setprioridad($fila[11]);
+            $inc-> setrestado($fila[9]);
             $inc-> setassignado($fila[5]);
             $inc-> setreportado($fila[6]);
             $inc-> setfecha($fila[7]);

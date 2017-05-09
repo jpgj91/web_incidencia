@@ -57,7 +57,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                             <td>".$inc -> getasunto()."</td>
                             <td id='cliente_est'>".$inc-> getestado()."</td>
                             <td>".$inc-> getfecha()."</td>
-                            <td>"."<form action='' method='post'>"."<input type='submit' name='close_inc' id='close_inc' value='$prueba'>"."</form>"."</td>
+                            <td>"."<form action='' method='post'>"."<input type='submit' name='close_incidencia' id='close_inc' value='$prueba'>"."</form>"."</td>
                         </tr>";
                 }
                 echo "</table>";
@@ -72,8 +72,10 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
            
            
 	</div>
-	<?php if (isset($_POST['close_inc'])) {
-			$id= $_POST['close_inc'];
+	<?php 
+		var_dump($_POST['close_incidencia']);
+	if (isset($_POST['close_incidencia'])) {
+			$id= $_POST['close_incidencia'];
 			
 			$conn = new mysqli('localhost', 'root', '','incidencias');
 			$sql = "SELECT * FROM `incidencia` WHERE `id`='$id' ";
@@ -91,8 +93,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             $inc_c-> setreportado($close_inc[6]);
             $inc_c-> setfecha($close_inc[7]);
 
+            $id= $inc_c -> getid($close_inc[0]);
             $asunto = $inc_c ->getasunto();
             $descripccion = $inc_c ->getdescription();
+            $estado = $inc_c-> setrestado($close_inc[4]);
+         
 		?>
 	<div id="wrap_form_Cerrar">
 		<form action="" method="post">
@@ -100,6 +105,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 				<tr>
 					<td>Nombre</td>
 					<td><?php echo "<input type='text' name='nombre' value='$nom' readonly>" ;?></td>
+					<?php echo "<input type='hidden' name='id_usu' value='$id' readonly>" ;?>
 				</tr>
 				<tr>
 					<td>Asunto</td>
@@ -136,10 +142,21 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 		</div>
 	</form>
 		<?php 
-		}else{}
-		if (isset($_POST['Cerrar_incidencia'])) {
-			# code...
+		
+		
 		}
+		   if (isset($_POST['Cerrar_incidencia'])) {
+		   	var_dump($_POST);
+			$id = (int)$_POST['id_usu'];
+			$conn = new mysqli('localhost', 'root', '','incidencias');
+				$sql ="UPDATE `incidencia` SET `estado_id`=3 WHERE`id`=$id";
+						$Res=$conn->query($sql);
+						var_dump($Res);
+						if ($Res==true) {
+							
+						}else{echo "aqui pasa algo";}
+						
+			}
         ?>
 		
 <?php 
