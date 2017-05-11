@@ -1,6 +1,4 @@
-<?php 
-    @session_start();
-?>
+
         <div></div>
         <form  class="wrap_log" action="" method="post">
         <div id="cabecera">

@@ -1,37 +1,4 @@
 
-    <!--
-             <table>
-                   
-                    <tr>
-                        <th>nombre <span class="obligado">*</span>: </th>
-                        <td><input type="text" name="usu"></td>
-                        <td> <span class="obligado"> <?php echo (isset($usuvacio)) ? $usuvacio : '';?></span></td>
-                    </tr>
-                    <tr>
-                        <th>email <span class="obligado">*</span>: </th>
-                        <td><input type="password" name="pass"></td>
-                        <td> <span class="obligado"> <?php echo (isset($passerr)) ? $passerr : '';?></td>
-                    </tr>
-                     <tr>
-                        <th>Firma personal <span class="obligado">*</span>: </th>
-                        <td><input type="text" name="alias"></td>
-                        <td> <span class="obligado"> <?php echo (isset($aliasvacio)) ? $aliasvacio : '';?></span></td>
-                    </tr>
-                    
-                    <tr>
-                        <th>contraseña <span class="obligado">*</span>: </th>
-                        <td><input type="password" name="rpass"></td>
-                        <td> <span class='obligado'><?php echo (isset($passerr)) ? $passerr : '';?></span></td>
-                    </tr>
-                    <tr>
-                        <th>Repita Contraseña <span class="obligado">*</span>: </th>
-                        <td><input type="text" name="nombre"></td>
-                       <td> <span class="obligado"> <?php echo (isset($nomvacio)) ? $nomvacio : '';?></span></td>
-                    </tr>
-                 
-                    
-                </table>
-    -->
     <div id="wrap_registro">
         <section >
             <h2>Registrarse</h2>

@@ -1,7 +1,7 @@
 <?php
 require_once 'class/F_validar.php';
 require_once 'class/Usuario.php';
-session_start();
+    
     $vista_Login= 'view/home.php';
     $vista_header= 'view/header.php';
     $vista_footer= 'view/footer.php';
@@ -37,7 +37,9 @@ if($valido->validarLogin($email,$password)){
         $_SESSION["usu_reg"][]=$loged->getmail();
         $_SESSION["usu_reg"][]=$loged->getrol();
         if (! empty($_SESSION["usu_reg"])){
-             header("Location: incidencias_cliente.php");
+             if($_SESSION["usu_reg"][4]==1){header("Location: incidencias_cliente.php");}
+             if($_SESSION["usu_reg"][4]==2){header("Location: incidencias_jefeproyecto.php");}
+             if($_SESSION["usu_reg"][4]==3){header("Location: incidencias_programador.php");}
         }
         }else{
 

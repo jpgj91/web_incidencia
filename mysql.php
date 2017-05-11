@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `incidencias`.`incidencia` (
   `asunto` VARCHAR(100) NOT NULL,
   `prioridad_id` INT NOT NULL,
   `estado_id` INT NOT NULL,
-  `asignado_usuario_id` INT NOT NULL,
+  `asignado_usuario_id` INT  NULL,
   `reportador_usuario_id` INT NOT NULL,
   `fecha_creacion` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -224,3 +224,12 @@ INSERT INTO `estado`(`name`) VALUES ('cerrado');
 INSERT INTO `prioridad`(`name`) VALUES ('Alta');
 INSERT INTO `prioridad`(`name`) VALUES ('media');
 INSERT INTO `prioridad`(`name`) VALUES ('baja');
+-- -----------------------------------------------------
+-- Table `usuario`
+-- -----------------------------------------------------
+INSERT INTO `usuario`(`name`, `password`, `email`, `rol_id`) VALUES ('jose','e10adc3949ba59abbe56e057f20f883e','jose@gmail.com','1');
+INSERT INTO `usuario`(`name`, `password`, `email`, `rol_id`) VALUES ('juan','e10adc3949ba59abbe56e057f20f883e','juan@gmail.com','1');
+INSERT INTO `usuario`(`name`, `password`, `email`, `rol_id`) VALUES ('rafael','e10adc3949ba59abbe56e057f20f883e','rafael@gmail.com','1');
+INSERT INTO `usuario`(`name`, `password`, `email`, `rol_id`) VALUES ('pedro','e10adc3949ba59abbe56e057f20f883e','pedro@gmail.com','2');
+INSERT INTO `usuario`(`name`, `password`, `email`, `rol_id`) VALUES ('antonio','e10adc3949ba59abbe56e057f20f883e','antonio@gmail.com','3');
+INSERT INTO `usuario`(`name`, `password`, `email`, `rol_id`) VALUES ('pedro','e10adc3949ba59abbe56e057f20f883e','pedro@gmail.com','3');
