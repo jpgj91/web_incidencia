@@ -20,41 +20,41 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id` where `incidencia`.`reportador_usuario_id` ='$user'";
 
     $resultado=$conn->query($sql);
-    var_dump($resultado);
+   
     $nfilas = $resultado->num_rows;
 
     $conn->close();
  
-        echo "
-        <table border = 1 cellspacing = 1 cellpadding = 1>
-        <tr>
-            <th>id</th>
-            <th>descripcion</th>
-            <th>asunto</th>
-            <th>prioridad</th>
-            <th>estado</th>
-            <th>assignado</th>
-            <th>reportador</th>
-            <th>fecha</th>
-        </tr>";
+   
   if ($resultado){
         
                 
             if ($nfilas > 0){
+                echo "<table id='incidecnias_general'>
+                            <thead>
+                                <th  colspan='8'>incidencias</th>
+                            </thead>
+                            <tr>
+                                <th>id</th>
+                                <th>descripcion</th>
+                                <th>asunto</th>
+                                <th>prioridad</th>
+                                <th>estado</th>
+                                <th>assignado</th>
+                                <th>reportador</th>
+                                <th>fecha</th>
+                            </tr>";
                 for ($i=0; $i<$nfilas; $i++){
-                 $fila=$resultado->fetch_array();
-                 $inc = new Incidencia();
-            echo '<pre>' . var_export($fila, true) . '</pre>';
-            $inc -> setid($fila[0]);
-            $inc -> setdescription($fila[1]);
-            $inc -> setassunto($fila[2]);
-            $inc -> setprioridad($fila[11]);
-            $inc-> setrestado($fila[9]);
-            $inc-> setassignado($fila[5]);
-            $inc-> setreportado($fila[6]);
-            $inc-> setfecha($fila[7]);
-               
-
+                    $fila=$resultado->fetch_array();
+                    $inc = new Incidencia();
+                    $inc -> setid($fila[0]);
+                    $inc -> setdescription($fila[1]);
+                    $inc -> setassunto($fila[2]);
+                    $inc -> setprioridad($fila[11]);
+                    $inc-> setrestado($fila[9]);
+                    $inc-> setassignado($fila[5]);
+                    $inc-> setreportado($fila[6]);
+                    $inc-> setfecha($fila[7]);
                  echo " <tr>
                             <td>".$inc -> getid()."</td>
                             <td>".$inc -> getdescription()."</td>
@@ -67,6 +67,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                         </tr>";
                 }
                 echo "</table>";
+            }else{
+                echo "<div>
+                            <h2>No tienes ninguna incidencia</h2>
+                            <p>*Crea incidencia para que aparezca.....</p><a href='#'>Pulsa aqui</a>
+                    </div>";
             }
 
         }

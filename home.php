@@ -6,7 +6,7 @@ require_once 'class/Usuario.php';
     $vista_header= 'view/header.php';
     $vista_footer= 'view/footer.php';
 
-
+@session_start();
 if(isset($_POST['Logearse'])){
         $email      = (isset($_POST['email'])) ? $_POST['email'] : null;
         $password   = (isset($_POST['pass'])) ? $_POST['pass']  : null;

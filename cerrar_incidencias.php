@@ -149,7 +149,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 		   	var_dump($_POST);
 			$id = (int)$_POST['id_usu'];
 			$conn = new mysqli('localhost', 'root', '','incidencias');
-				$sql ="UPDATE `incidencia` SET `estado_id`=3 WHERE`id`=$id";
+				$sql ="UPDATE `incidencia` SET `estado_id`=5 WHERE`id`=$id";
 						$Res=$conn->query($sql);
 						var_dump($Res);
 						if ($Res==true) {

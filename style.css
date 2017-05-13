@@ -1,5 +1,12 @@
-body{
-background-color: #f8f9f9 ;
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+ html   body{
+     margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #f8f9f9;
+
+    font-family: 'Open Sans', sans-serif;
 }
 a{
 	color:black;
@@ -39,7 +46,7 @@ label{
 }
 
 #cabecera {
-    background: #ff3838 none repeat scroll 0 0;
+    background: #46A0AE none repeat scroll 0 0;
     border-radius: 10px 10px 0 0;
     color: white;
     font-size: 1.2em;
@@ -65,14 +72,14 @@ label{
   float: left;
 }
 .btn{
-position: relative;
+  position: relative;
   margin-top: 30px;
   margin-bottom: 30px;
   left: 27%;
   transform: translate(-50%, 0);
   font-family: inherit;
   color: white;
-  background: #FF3838;
+  background: #46A0AE;
   outline: none;
   border: none;
   padding: 5px 15px;
@@ -158,25 +165,31 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #edb447;
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: #edb447;
 }
 /*header*/
 
 #head {
-    top: 0;
-    margin: 0 auto;
     width: 100%;
     height: 70px;
-    background: #ADD8E6;    
+    background-color: #46AE88;
+    /* For WebKit (Safari, Chrome, etc) */
+    background: #46AE88 -webkit-gradient(linear, left top, left bottom, from(#468FAE), to(#46AE88)) no-repeat;
+    /* Mozilla,Firefox/Gecko */
+    background: #46AE88 -moz-linear-gradient(top, #468FAE, #46AE88) no-repeat;
+    /* IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#46AE88) no-repeat;
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#468FAE)" no-repeat;  
 }
 #logo{
   width: 50%;
   height: 60px;
-  background-image: url(img/logo.png);
+  background-image: url(img/logo3.png);
   background-repeat: no-repeat;
   float: left;
 }
@@ -193,7 +206,15 @@ li a:hover:not(.active) {
    width:100%;
    left: 0;
    height:30px;   /* Height of the footer */
-   background:red;
+   background-color: #46AE88;
+    /* For WebKit (Safari, Chrome, etc) */
+    background: #46AE88 -webkit-gradient(linear, left top, left bottom, from(#468FAE), to(#46AE88)) no-repeat;
+    /* Mozilla,Firefox/Gecko */
+    background: #46AE88 -moz-linear-gradient(top, #468FAE, #46AE88) no-repeat;
+    /* IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#46AE88) no-repeat;
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#468FAE)" no-repeat;   
 }
 
 /*cerrar incidencia cliente*/
@@ -207,4 +228,22 @@ li a:hover:not(.active) {
 }
 #cliente_id,#cliente_est{
   width: 5%;
+}
+
+/*Tabla incidencias total*/
+#incidecnias_general{
+  width: 95%;
+  margin-top: 3%;
+  margin-left: 3%;
+  text-align: center;
+}
+#incidecnias_general thead tr{
+  height: 50px;
+}
+
+
+
+}
+#incidecnias_general tr,#incidecnias_general td{
+text-align: center;
 }

@@ -6,7 +6,6 @@
     $vista_header= 'view/header.php';
 	$vista_footer= 'view/footer.php';
 	require_once 'class/Incidencia.php';
-	require_once 'class/Usuario.php';
 	require_once $vista_header;
 ?>
 <link rel="stylesheet" type="text/css" href="style.css">
@@ -18,7 +17,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` WHERE  `asignado_usuario_id` IS NULL";
+    $sql = "SELECT * FROM `incidencia` where `reportador_usuario_id` ='$user'";
 
     $resultado=$conn->query($sql);
     
@@ -102,66 +101,61 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 		?>
 	<div id="wrap_form_Cerrar">
 		<form action="" method="post">
-			
-					<p>Seleccione un programador</p>
+			<table>
+				<tr>
+					<td>Nombre</td>
+					<td><?php echo "<input type='text' name='nombre' value='$nom' readonly>" ;?></td>
 					<?php echo "<input type='hidden' name='id_usu' value='$id' readonly>" ;?>
-					<?php
-       						$conn = new mysqli('localhost', 'root', '','incidencias');
-       	 					$sql = "SELECT * FROM `usuario` WHERE `rol_id`=3";
-       						 $res=$conn->query($sql);
-        					$nfilas = $res->num_rows;
-        						if ($res){
-
-
-            					if ($nfilas > 0){
-                					for ($i=0; $i<$nfilas; $i++){
-                    				$fila=$res->fetch_array();
-
-                    				$usu_p =new Usuario();
-
-                    				$usu_p->setid($fila[0]);
-                    				$usu_p->setname($fila[1]);
-                    				$usu_p->setpass($fila[2]);
-                    				$usu_p->setmail($fila[3]);
-                    				$usu_p->setrol($fila[4]);
-
-                    				$id_p=$usu_p->getid();
-                    				$name_p=$usu_p->getname();
-
-                    			echo"<label><input type='radio' name='programador' value='$id_p'>".$name_p."</label>"."<br>";
-                    			
-                			}
-
-            			}
-
-            		$conn->close();
-        			}?>
-        			<input type="submit" name="assignado_p">
+				</tr>
+				<tr>
+					<td>Asunto</td>
+					<td><?php echo "<input type='text' name='nombre' value='$asunto' readonly> " ;?></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><?php echo "<input type='text' name='nombre' value='$mail' readonly> " ;?></td>
+				</tr>
+				<tr>
+					<td>Prioridad</td>
+					<td>
+						<input type="radio" name="prioridad" value="1"> Alta
+  						<input type="radio" name="prioridad" value="2"> media
+  						<input type="radio" name="prioridad" value="3"> baja
+					</td>
+				</tr>
+				<tr>
+					<td>Asunto</td>
+					<td>
+						<textarea name="descripccion" readonly><?php echo $descripccion;?></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>Nota interna</td>
+					<td>
+						<textarea placeholder="max 140 caracteres"></textarea>
+				</td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="Cerrar_incidencia" value="cerrar_incidencia"></td>
+				</tr>
+			</table>
 		</div>
 	</form>
 		<?php 
 		
 		
 		}
-		   if (isset($_POST['assignado_p'])) {
-		   
-
+		   if (isset($_POST['Cerrar_incidencia'])) {
+		   	var_dump($_POST);
 			$id = (int)$_POST['id_usu'];
-			$valor = $_POST['programador'];
-				if(!empty($valor)){
-						$conn = new mysqli('localhost', 'root', '','incidencias');
-						$sql ="UPDATE `incidencia` SET `asignado_usuario_id`=$valor WHERE`id`=$id";
-                        $sql1 ="UPDATE `incidencia` SET `estado_id`=2 WHERE`id`=$id";
+			$conn = new mysqli('localhost', 'root', '','incidencias');
+				$sql ="UPDATE `incidencia` SET `estado_id`=4 WHERE`id`=$id";
 						$Res=$conn->query($sql);
-                        $Res1=$conn->query($sql1);
-						if ($Res==true && $Res1==true) {
-                            
+						var_dump($Res);
+						if ($Res==true) {
 							
 						}else{echo "aqui pasa algo";}
-				}else{
-					$error="falta seleccionar programador";
-					echo $error;
-				}
+						
 			}
         ?>
 		

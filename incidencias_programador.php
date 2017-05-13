@@ -25,22 +25,26 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 
     $conn->close();
  
-        echo "
-        <table border = 1 cellspacing = 1 cellpadding = 1>
-        <tr>
-            <th>id</th>
-            <th>descripcion</th>
-            <th>asunto</th>
-            <th>prioridad</th>
-            <th>estado</th>
-            <th>assignado</th>
-            <th>reportador</th>
-            <th>fecha</th>
-        </tr>";
+       
   if ($resultado){
         
                 
             if ($nfilas > 0){
+                  echo "
+                        <table id='incidecnias_general'>
+                            <thead>
+                                <th  colspan='8'>incidencias</th>
+                            </thead>
+                            <tr>
+                                <th>id</th>
+                                <th>descripcion</th>
+                                <th>asunto</th>
+                                <th>prioridad</th>
+                                <th>estado</th>
+                                <th>assignado</th>
+                                <th>reportador</th>
+                                <th>fecha</th>
+                            </tr>";
                 for ($i=0; $i<$nfilas; $i++){
                  $fila=$resultado->fetch_array();
                  $inc = new Incidencia();
@@ -53,7 +57,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             $inc-> setassignado($fila[5]);
             $inc-> setreportado($fila[6]);
             $inc-> setfecha($fila[7]);
-               
+                
 
                  echo " <tr>
                             <td>".$inc -> getid()."</td>
@@ -73,7 +77,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 
             echo "<div>
                     <p>No tienes ninguna incidencia assignada</p>
-            </div>";
+                    </div>";
         }
 
        
