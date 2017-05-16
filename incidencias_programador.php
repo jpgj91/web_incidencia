@@ -71,13 +71,13 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                         </tr>";
                 }
                 echo "</table>";
-            }
-
-        }else{
+            }else{
 
             echo "<div>
-                    <p>No tienes ninguna incidencia assignada</p>
+                    <p>No tienes ninguna incidencia que revisar</p>
                     </div>";
+        }
+
         }
 
        

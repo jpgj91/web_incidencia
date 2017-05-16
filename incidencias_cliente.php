@@ -70,7 +70,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             }else{
                 echo "<div>
                             <h2>No tienes ninguna incidencia</h2>
-                            <p>*Crea incidencia para que aparezca.....</p><a href='#'>Pulsa aqui</a>
+                            <p>*Crea incidencia para que aparezca.....</p><a href='Crearincidencia.php'>Pulsa aqui</a>
                     </div>";
             }
 

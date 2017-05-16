@@ -72,6 +72,10 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                 echo "</table>";
             }
 
+        }else{
+             echo "<div>
+                    <p>No tienes ninguna incidencia assignada</p>
+                    </div>";
         }
 
        

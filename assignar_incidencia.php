@@ -25,20 +25,21 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     $nfilas = $resultado->num_rows;
     
     $conn->close();
- 
-        echo "
-        <table  id='cerrar_inc_cliente' >
-        <tr>
-            <th id='cliente_id'>id</th>
-            <th>asunto</th>
-            <th id='cliente_est'>estado</th>
-            <th>fecha</th>
-            <th>Cerrar</th>
-        </tr>";
+     
+       
   if ($resultado){
         
                 
             if ($nfilas > 0){
+             echo "
+                    <table  id='cerrar_inc_cliente' >
+                        <tr>
+                            <th id='cliente_id'>id</th>
+                            <th>asunto</th>
+                            <th id='cliente_est'>estado</th>
+                            <th>fecha</th>
+                             <th>Cerrar</th>
+                        </tr>";
                 for ($i=0; $i<$nfilas; $i++){
                  $fila=$resultado->fetch_array();
                  $inc = new Incidencia();
@@ -62,7 +63,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                         </tr>";
                 }
                 echo "</table>";
-            }
+            }else{
+             echo "<div>
+                        <p>No tienes ninguna incidencia Por assignada</p>
+                    </div>";
+         }
 
         }
         	
@@ -74,7 +79,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
            
 	</div>
 	<?php 
-		var_dump($_POST['close_incidencia']);
+		
 	if (isset($_POST['close_incidencia'])) {
 			$id= $_POST['close_incidencia'];
 			

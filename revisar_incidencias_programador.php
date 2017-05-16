@@ -25,7 +25,12 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     
     $conn->close();
  
-        echo "
+     
+  if ($resultado){
+        
+                
+            if ($nfilas > 0){
+            	   echo "
         <table  id='cerrar_inc_cliente' >
         <tr>
             <th id='cliente_id'>id</th>
@@ -34,10 +39,6 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             <th>fecha</th>
             <th>Cerrar</th>
         </tr>";
-  if ($resultado){
-        
-                
-            if ($nfilas > 0){
                 for ($i=0; $i<$nfilas; $i++){
                  $fila=$resultado->fetch_array();
                  $inc = new Incidencia();
@@ -61,7 +62,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                         </tr>";
                 }
                 echo "</table>";
-            }
+            }else{
+        	 echo "<div>
+                    <p>No tienes ninguna incidencia por revisar</p>
+                    </div>";
+        	}
 
         }
         	
