@@ -31,9 +31,7 @@ label{
 	font-weight: bold;
 	font-size: 15px;
 }
-
 /*Login*/
-
 .wrap_log {
     background: white none repeat scroll 0 0;
     border-radius: 10px;
@@ -120,10 +118,10 @@ label{
 /*Registrarse*/
 #wrap_registro{
 	position: absolute;
-	top:50%;
+	top:30%;
 	left:50%;
-	width:400px;
-	margin-left:-200px;/
+	width:650px;
+	margin-left:-300px;/
 	height:300px;
 	margin-top:-150px;
 	padding:5px;
@@ -241,9 +239,43 @@ li a:hover:not(.active) {
   height: 50px;
 }
 
-
-
 }
 #incidecnias_general tr,#incidecnias_general td{
 text-align: center;
+}
+/*cookie*/
+#barraaceptacion {
+    display:none;
+    position:fixed;
+    left:0px;
+    right:0px;
+    bottom:30px;
+    padding-bottom:20px;
+    width:100%;
+    text-align:center;
+    min-height:40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color:#fff;
+    z-index:99999;
+}
+ 
+.inner {
+    width:100%;
+    position:absolute;
+    padding-left:5px;
+    font-family:verdana;
+    font-size:12px;
+    top:30%;
+}
+ 
+.inner a.ok {
+    padding:4px;
+    color:#00ff2e;
+    text-decoration:none;
+}
+ 
+.inner a.info {
+    padding-left:5px;
+    text-decoration:none;
+    color:#faff00;
 }

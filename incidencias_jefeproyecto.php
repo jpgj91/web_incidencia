@@ -3,6 +3,7 @@
     @session_start();
     $user=$_SESSION['usu_reg'][0];
     $vista_header= 'view/header.php';
+    $vista_Pcookie= 'view/cookies_politica.php';
 	$vista_footer= 'view/footer.php';
 	require_once 'class/Incidencia.php';
 	require_once $vista_header;
@@ -82,5 +83,6 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
            ?>
 </body>
 <?php 
+require_once $vista_Pcookie;
 require_once $vista_footer;
 ?>

@@ -32,7 +32,7 @@ if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
                 }
 
                 $conn->close();
-                header("Location: incidencias_cliente.php");
+                header("Location: home.php");
             }else {
                 $emailErr = 'Email ya existe.';
                 $vista_form = 'Registrarse.php';
@@ -50,7 +50,7 @@ if(isset($_POST['visto']) && $_POST['visto'] == 'yes'){
         $usuvacio     = isset($valido->error_user)  ? $valido->error_user  : null;
         $emailErr     = isset($valido->error_mail)  ? $valido->error_mail  : null;
 
-            $vista_form = 'registro.php';
+            
     }
 
 

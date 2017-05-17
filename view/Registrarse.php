@@ -23,11 +23,11 @@
         	<legend>Contraseña</legend>
         		<div>
             		<label>password</label><span class="obligado">*</span><input type="password" name="pass">
-            	<span class="error">Aqui: <?php echo (isset($passerr)) ? $passerr : '';?></span>
+            	<span class="error"><?php echo (isset($passerr)) ? $passerr : '';?></span>
            		</div>
             	<div>
             		<label>Repita password</label><span class="obligado">*</span><input type="password" name="pass2">
-           			 <span class="error">Aqui:<?php echo (isset($passerrep)) ? $passerrep : '';?></span>
+           			 <span class="error"><?php echo (isset($passerrep)) ? $passerrep : '';?></span>
            		 </div>
            	</fieldset>
         </section>

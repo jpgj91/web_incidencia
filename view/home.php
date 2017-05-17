@@ -15,7 +15,7 @@
         </div>
         <div id="login_btn">
             <input  class="btn" type="submit" value="Logearse" name="Logearse">
-            <a href="F_registro.php" class="btn"  name="Login" >Registrarse</a>
+            <a href="registro.php" class="btn"  name="Login" >Registrarse</a>
         </div>
         </section>
         </form>
