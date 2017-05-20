@@ -217,16 +217,49 @@ li a:hover:not(.active) {
 
 /*cerrar incidencia cliente*/
 #wrap_tabla{
-  width: 50%;
+  width: 62%;
   text-align: center;
+  margin: 1% 0 0 1%;
   float: left;
 }
 #cerrar_inc_cliente{
   width: 100%;
+  border-collapse: collapse;
+  text-align: center;
 }
-#cliente_id,#cliente_est{
-  width: 5%;
+th#t_cerrar_id,td#t_cerrar_id {width: 5%;text-align: center;}
+th#t_cerrar_cerrar,td#t_cerrar_cerrar {width: 4%;text-align: center;}
+th#t_cerrar_fecha,td#t_cerrar_fecha {width: 10%;text-align: center;}
+th#t_cliente_est,td#t_cliente_est {width: 13%;text-align: center;}
+table#cerrar_inc_cliente  tr:first-child {color:#edb447;text-align: center;background-color: #46AE88;background: #46AE88 -webkit-gradient(linear, left top, left bottom, from(#468FAE), to(#46AE88)) no-repeat;background: #46AE88 -moz-linear-gradient(top, #468FAE, #46AE88) no-repeat;filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#46AE88) no-repeat;-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#468FAE)" no-repeat;  ext-align: center;}
+
+/*parte de cerrar  incidencia*/
+div#wrap_form_Cerrar {width: 30%;float: left;margin: 0% 0 0 4%;}
+#button_cerrar{
+  transform: translate(-50%, 0);
+  font-family: inherit;
+  color: white;
+  background: #46A0AE;
+  outline: none;
+  border: none;
+  padding: 5px 15px;
+  font-size: 1.3em;
+  font-weight: 400;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  float: right;
 }
+.btn:hover{
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+} 
 
 /*Tabla incidencias total*/
 #incidecnias_general{
@@ -234,6 +267,7 @@ li a:hover:not(.active) {
   margin-top: 3%;
   margin-left: 3%;
   text-align: center;
+  border-collapse: collapse;
 }
 #incidecnias_general thead tr{
   height: 50px;
@@ -243,20 +277,69 @@ li a:hover:not(.active) {
 #incidecnias_general tr,#incidecnias_general td{
 text-align: center;
 }
+table#incidecnias_general th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+table#incidecnias_general tr:nth-child(even){background-color: #D9FAFF;}
+table#incidecnias_general thead tr th:first-child {
+  color:#edb447;
+  font-size: 25px;
+  background-color: #46AE88;
+  /* For WebKit (Safari, Chrome, etc) */
+  background: #46AE88 -webkit-gradient(linear, left top, left bottom, from(#468FAE), to(#46AE88)) no-repeat;
+  /* Mozilla,Firefox/Gecko */
+  background: #46AE88 -moz-linear-gradient(top, #468FAE, #46AE88) no-repeat;
+  /* IE 5.5 - 7 */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#46AE88) no-repeat;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#468FAE, endColorstr=#468FAE)" no-repeat;  
+    ext-align: center;
+
+}
+
+table#incidecnias_general th {background-color:#46A0AE ;color: white;}
+th#t_estado,td#t_estado {width: 13%;}
+th#t_prioridad,td#t_prioridad{width: 10%;}
+th#t_id,td#t_id {width: 3%;}
+th#t_prioridad,td#t_prioridad {width: 5%;}
+th#t_assingacion,td#t_assingacion {width: 12%;}
+th#t_asunto,td#t_asunto {width: 55%;}
+th#t_fecha,td#t_fecha {width: 7%;}
+
+input#chat{
+  background-color: transparent;
+  background-image: url('img/chat.png');
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  text-indent: -1500px;
+  border: 0;
+ }
+ input#close_inc{
+  background-color: transparent;
+  background-image: url('img/close.png');
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  text-indent: -1500px;
+  border: 0;
+ }
 /*cookie*/
 #barraaceptacion {
-    display:none;
-    position:fixed;
-    left:0px;
-    right:0px;
-    bottom:30px;
-    padding-bottom:20px;
-    width:100%;
-    text-align:center;
-    min-height:40px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color:#fff;
-    z-index:99999;
+  display:none;
+  position:fixed;
+  left:0px;
+  right:0px;
+  bottom:30px;
+  padding-bottom:20px;
+  width:100%;
+  text-align:center;
+  min-height:40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color:#fff;
+  z-index:99999;
 }
  
 .inner {
@@ -269,13 +352,13 @@ text-align: center;
 }
  
 .inner a.ok {
-    padding:4px;
-    color:#00ff2e;
-    text-decoration:none;
+  padding:4px;
+  color:#00ff2e;
+  text-decoration:none;
 }
  
 .inner a.info {
-    padding-left:5px;
-    text-decoration:none;
-    color:#faff00;
+  padding-left:5px;
+  text-decoration:none;
+  color:#faff00;
 }

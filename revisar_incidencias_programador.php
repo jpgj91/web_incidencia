@@ -17,7 +17,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` where `reportador_usuario_id` ='$user'";
+    $sql = "SELECT * FROM `incidencia` where `asignado_usuario_id` ='$user'";
 
     $resultado=$conn->query($sql);
     

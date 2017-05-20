@@ -14,6 +14,7 @@ class Incidencia {
     private $estado;
     private $assignado;
     private $reportado;
+    private $error;
     private $fecha;
 
 
@@ -40,6 +41,9 @@ class Incidencia {
     function getreportado() {
         return $this -> reportado;
     }
+    function geterror() {
+        return $this -> error;
+    }
      function getfecha() {
         return $this -> fecha;
     }
@@ -64,6 +68,9 @@ class Incidencia {
     }
     function setreportado($reportado) {
         $this -> reportado = $reportado;
+    }
+    function seterror($error) {
+        $this -> error = $error;
     }
     function setfecha($fecha) {
         $this -> fecha = $fecha;

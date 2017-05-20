@@ -8,16 +8,20 @@ $vista_footer= 'view/footer.php';
 if (isset($_POST['Crear_incidencia'])) {
 	if (!empty($_POST['asunto'])) {
 		if (!empty($_POST['prioridad'])) {
+			if ($_POST['t_err']!="seleccione") {
+				# code...
+			
 			$asunto   = $_POST['asunto'];
 			$priority = $_POST['prioridad'];
 			$mensaje  = $_POST['descripccion'];
+			$error_tipo = $_POST['t_err'];
 			$user=$_SESSION['usu_reg'][0];
 			$estado  = 1;
 			$null = "";
-			$fecha=strftime( "%d/%m/%Y ", time() );
+			$fecha_actual = date('Y-m-d'); 
 			$conn = new mysqli('localhost', 'root', '','incidencias');
-			$sql = 'INSERT INTO `incidencia` (descripcion,asunto,prioridad_id,estado_id,reportador_usuario_id)
-                 VALUES ("'.$mensaje.'","'.$asunto.'","'.$priority.'","'.$estado.'","'.$user.'")';
+			$sql = 'INSERT INTO `incidencia` (`descripcion`, `asunto`, `prioridad_id`, `estado_id`,`reportador_usuario_id`, `error_id`,`fecha`)
+                 VALUES ("'.$mensaje.'","'.$asunto.'","'.$priority.'","'.$estado.'","'.$user.'","'.$error_tipo.'","'.$fecha_actual.'")';
                 
                  if ($conn->query($sql) === TRUE) {
                  	header('Location: incidencias_cliente.php');
@@ -25,17 +29,19 @@ if (isset($_POST['Crear_incidencia'])) {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
             $conn->close();
-           
+           }else{
+           		$err_tipo= "debe seleccionar un error";
+           }
              
 		}else{
-			echo "radio buton vacio";
+			$err_prioridad= "radio buton vacio";
 		}
+           
 	}else{
-		echo "Asunto no puede estar vacio";
+		$err_asunto= "Asunto no puede estar vacio";
 	}
 }else{
-	echo"en proceso";
-
+	
 }
 
 require_once $vista_header;

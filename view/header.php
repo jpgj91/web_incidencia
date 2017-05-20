@@ -32,7 +32,7 @@
                 <?php if(empty($_SESSION["usu_reg"])){}else{ if($_SESSION["usu_reg"][4]==2){echo "<li><a  href='assignar_incidencia.php'>assignacion</a></li>";} }?>
                 <?php if(empty($_SESSION["usu_reg"])){}else{ if($_SESSION["usu_reg"][4]==2){echo "<li><a  href='revisar_incidencias_jefeproyecto.php'>Revisar incidencias</a></li>";} }?>
                 <?php if(empty($_SESSION["usu_reg"])){}else{ if($_SESSION["usu_reg"][4]==3){echo "<li><a  href='incidencias_programador.php'>Incidencias</a></li>";} }?>
-                <?php if(empty($_SESSION["usu_reg"])){}else{ if($_SESSION["usu_reg"][4]==3){echo "<li><a  href='revisar_incidencias_jefeproyecto.php'>Revisar Incidencias</a></li>";} }?>
+                <?php if(empty($_SESSION["usu_reg"])){}else{ if($_SESSION["usu_reg"][4]==3){echo "<li><a  href='revisar_incidencias_programador.php'>Revisar Incidencias</a></li>";} }?>
                 <?php if(empty($_SESSION["usu_reg"])){}else{ if($_SESSION["usu_reg"][4]==3){echo "<li><a  href='assignar_incidencia.php'>assignacion</a></li>";} }?>
                 <?php if(empty($_SESSION["usu_reg"])){}else{ echo "<li class='active' style=' float: right;'><a href='logout.php'>cerrarsesion</a></li>"; }?>
                 

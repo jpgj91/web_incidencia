@@ -26,45 +26,47 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 
     $conn->close();
  
-   
+   //join`usuario` ON `incidencia`.`asignado_usuario_id`=`usuario`.`id`
   if ($resultado){
         
                 
             if ($nfilas > 0){
                 echo "<table id='incidecnias_general'>
                             <thead>
-                                <th  colspan='8'>incidencias</th>
-                            </thead>
                             <tr>
-                                <th>id</th>
-                                <th>descripcion</th>
-                                <th>asunto</th>
-                                <th>prioridad</th>
-                                <th>estado</th>
-                                <th>assignado</th>
-                                <th>reportador</th>
-                                <th>fecha</th>
+                                <th  colspan='8'>Incidencias</th>
+                            </tr>
+                            </thead>
+                             <tr>
+                                <th id='t_id'>id</th>
+                                <th id='t_asunto'>asunto</th>
+                                <th id='t_prioridad'>prioridad</th>
+                                <th id='t_estado'>estado</th>
+                                <th id='t_assingacion'>assignado</th>
+                                <th id='t_fecha'>fecha</th>
+                                <th id='t_comentario'>Comentario</th>
                             </tr>";
                 for ($i=0; $i<$nfilas; $i++){
                     $fila=$resultado->fetch_array();
+                    //echo '<pre>' . var_export($fila, true) . '</pre>';
                     $inc = new Incidencia();
                     $inc -> setid($fila[0]);
                     $inc -> setdescription($fila[1]);
                     $inc -> setassunto($fila[2]);
-                    $inc -> setprioridad($fila[11]);
-                    $inc-> setrestado($fila[9]);
+                    $inc -> setprioridad($fila[12]);
+                    $inc-> setrestado($fila[10]);
                     $inc-> setassignado($fila[5]);
                     $inc-> setreportado($fila[6]);
-                    $inc-> setfecha($fila[7]);
+                    $inc-> setfecha($fila[8]);
+                    $id=$inc -> getid();
                  echo " <tr>
-                            <td>".$inc -> getid()."</td>
-                            <td>".$inc -> getdescription()."</td>
-                            <td>".$inc -> getasunto()."</td>
-                            <td>".$inc -> getprioridad()."</td>
-                            <td>".$inc-> getestado()."</td>
-                            <td>".$inc-> getassignado()."</td>
-                            <td>".$inc->  getreportado()."</td>
-                            <td>".$inc->  getfecha()."</td>
+                            <td id='t_id'>".$id."</td>
+                            <td id='t_asunto'>".$inc -> getasunto()."</td>
+                            <td id='t_prioridad'>".$inc -> getprioridad()."</td>
+                            <td id='t_estado'>".$inc-> getestado()."</td>
+                            <td id='t_assingacion'>".$inc-> getassignado()."</td>
+                            <td id='t_fecha'>".$inc->  getfecha()."</td>
+                            <td t_comentario>"."<input type='submit' name='comentarios' value='$id' id='chat'>"."</td>
                         </tr>";
                 }
                 echo "</table>";
@@ -79,6 +81,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 
        
            ?>
+
 </body>
 <?php 
 require_once $vista_Pcookie;
