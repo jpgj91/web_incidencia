@@ -3,18 +3,26 @@
     $id=$_SESSION['usu_reg'][0];
     $nom=$_SESSION['usu_reg'][1];
     $mail=$_SESSION['usu_reg'][2];
+    $vista_header= 'view/header.php';
+    
+    $vista_footer= 'view/footer.php';
+  require_once 'class/Incidencia.php';
+  require_once $vista_header;
+
    
 ?>
 <link rel="stylesheet" type="text/css" href="style.css">
 <h2>Comentarios</h2>
 <form action="" method="post">
 	
-			<?php 
+			<?php
+        $prueba=$_POST['comentarios'];
+ 
 			$conn = new mysqli('localhost', 'root','','incidencias');
         $sql = "SELECT comm.texto,comm.usuario_id,incidencias.usuario.name
 				FROM incidencias.comentario AS comm
  				JOIN incidencias.usuario ON incidencias.usuario.id = comm.usuario_id
-				WHERE comm.incidencia_id = 13 AND
+				WHERE comm.incidencia_id = $prueba AND
       			comm.visibilidad_id IN (
        			SELECT incidencias.rol_has_visibilidad.visibilidad_id
         		FROM incidencias.rol_has_visibilidad
@@ -45,5 +53,10 @@
                 
             }
         }
-            $conn->close();?>
+            $conn->close();
+
+            ?>
 </form>
+<?php 
+require_once $vista_footer;
+?>

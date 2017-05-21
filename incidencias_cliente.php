@@ -7,7 +7,7 @@
 	$vista_footer= 'view/footer.php';
 	require_once 'class/Incidencia.php';
 	require_once $vista_header;
-
+	
 ?>
 <link rel="stylesheet" type="text/css" href="style.css">
  <body>
@@ -66,7 +66,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                             <td id='t_estado'>".$inc-> getestado()."</td>
                             <td id='t_assingacion'>".$inc-> getassignado()."</td>
                             <td id='t_fecha'>".$inc->  getfecha()."</td>
-                            <td t_comentario>"."<input type='submit' name='comentarios' value='$id' id='chat'>"."</td>
+                            <td t_comentario>"."<form action='ver_comentarios.php' method='post'>"."<input type='submit' name='comentarios' value='$id' id='chat'>"."</form>"."</td>
                         </tr>";
                 }
                 echo "</table>";

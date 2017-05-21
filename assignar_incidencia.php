@@ -113,7 +113,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 					<?php
        						$conn = new mysqli('localhost', 'root', '','incidencias');
        	 					$sql = "SELECT * FROM `usuario` WHERE `rol_id`=3";
-       						 $res=$conn->query($sql);
+       						$res=$conn->query($sql);
         					$nfilas = $res->num_rows;
         						if ($res){
 
@@ -121,7 +121,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             					if ($nfilas > 0){
                 					for ($i=0; $i<$nfilas; $i++){
                     				$fila=$res->fetch_array();
-
+                                
                     				$usu_p =new Usuario();
 
                     				$usu_p->setid($fila[0]);
