@@ -83,29 +83,29 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 			$id= $_POST['close_incidencia'];
 			
 			$conn = new mysqli('localhost', 'root', '','incidencias');
-			$sql = "SELECT * FROM `incidencia` WHERE `id`='$id' ";
-			$res=$conn->query($sql);
+			$sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join `error` ON `incidencia`.`error_id`=`error`.`id` join `prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id`WHERE `incidencia`.`id`='$id' ";
+			$rest=$conn->query($sql);
 
     		$inc_c= new Incidencia();
-    		$close_inc=$res->fetch_array();
+    		$close_inc=$rest->fetch_array();
     		//echo '<pre>' . var_export($close_inc, true) . '</pre>';
     		$inc_c -> setid($close_inc[0]);
             $inc_c -> setdescription($close_inc[1]);
             $inc_c -> setassunto($close_inc[2]);
-            $inc_c -> setprioridad($close_inc[3]);
-            $inc_c-> setrestado($close_inc[4]);
+            $inc_c -> setprioridad($close_inc[14]);
+            $inc_c-> setrestado($close_inc[10]);
             $inc_c-> setassignado($close_inc[5]);
             $inc_c-> setreportado($close_inc[6]);
-            $inc_c-> seterror($close_inc[7]);
+            $inc_c-> seterror($close_inc[12]);
             $inc_c-> setfecha($close_inc[8]);
 
 
             $id= $inc_c -> getid($close_inc[0]);
             $asunto = $inc_c ->getasunto();
             $descripccion = $inc_c ->getdescription();
-            $prioridad = $inc_c -> getprioridad($close_inc[3]);
-            $estado = $inc_c-> getestado($close_inc[4]);
-            $tipo_err = $inc_c-> geterror($close_inc[4]);
+            $prioridad = $inc_c -> getprioridad();
+            $estado = $inc_c-> getestado();
+            $tipo_err = $inc_c-> geterror();
          
 		?>
 	<div id="wrap_form_Cerrar">
@@ -113,40 +113,46 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 			<h3>Cerrar Incidencia</h3>
 			<table>
 				<tr>
-					<td>Nombre</td>
-					<td><?php echo "<span>$nom</span>" ;?></td>
+					<td><strong> Nombre</strong></td>
+					<td><?php echo "<span><i>$nom</i></span>";?></td>
 					<?php echo "<input type='hidden' name='id_usu' value='$id' readonly>" ;?>
 				</tr>
 				<tr>
-					<td>Asunto</td>
+					<td><strong>Asunto</strong></strong></strong></td>
 					<td>
 					<textarea name="descripccion" rows="2" cols="50" readonly><?php echo $asunto;?></textarea>
 					</td>
 				</tr>
 				<tr>
-					<td>Email</td>
-					<td><?php echo "<span>$mail</span>" ;?></td>
+					<td><strong>Email</strong></strong></td>
+					<td><?php echo "<span><i>$mail</i></span>" ;?></td>
 				</tr>
 				<tr>
-					<td>Prioridad</td>
+					<td><strong>Prioridad</strong></td>
 					<td>
 						<?php echo $prioridad;?>
 					</td>
 				</tr>
-				<td>Tipo error</td>
+				<tr>
+					<td><strong>Estado</strong></td>
+					<td>
+						<?php echo $estado;?>
+					</td>
+				</tr>
+				<td><strong>Tipo error</strong></td>
 					<td>
 						<?php echo $tipo_err;?>
 					</td>
 				<tr>
-					<td>Descripcion</td>
+					<td><strong>Descripcion</strong></td>
 					<td>
 						<textarea placeholder="max 140 caracteres" rows="4" cols="50" readonly><?php echo $descripccion;?></textarea>
 					</td>
 				</tr>
 				<tr>
-					<td>Nota interna</td>
+					<td><strong>Nota interna</strong></td>
 					<td>
-						<textarea placeholder="max 140 caracteres" rows="4" cols="50"><?php echo $asunto;?></textarea>
+						<textarea placeholder="max 140 caracteres" rows="4" cols="50"></textarea>
 					</td>
 				</tr>
 				

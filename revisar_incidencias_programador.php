@@ -137,11 +137,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 				<tr>
 					<td>Nota interna</td>
 					<td>
-						<textarea placeholder="max 140 caracteres"></textarea>
+						<textarea name="comentario" placeholder="max 140 caracteres"></textarea>
 				</td>
 				</tr>
 				<tr>
-					<td><input type="submit" name="Cerrar_incidencia" value="cerrar_incidencia"></td>
+					<td><input type="submit" name="Cerrar_incidencia" value="Enviar Revision"></td>
 				</tr>
 			</table>
 		</div>
@@ -158,7 +158,15 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 						$Res=$conn->query($sql);
 						var_dump($Res);
 						if ($Res==true) {
-							
+							if (!empty($_POST['comentario'])) {
+								$coment =$_POST['comentario'];
+								$conn = new mysqli('localhost', 'root', '','incidencias');
+								$sql = 'INSERT INTO `comentario`(`texto`, `visibilidad_id`, `incidencia_id`, `usuario_id`) VALUES ("'.$coment.'","2","'.$id.'","'.$user.'")';
+								$conn->query($sql);
+								header('Location: incidencias_programador.php');
+							}else{
+									header('Location: incidencias_programador.php');
+								}
 						}else{echo "aqui pasa algo";}
 						
 			}

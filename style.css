@@ -362,3 +362,9 @@ input#chat{
   text-decoration:none;
   color:#faff00;
 }
+
+/*crear incidencia*/
+#wrap_crearinc{
+  width: 50%;
+  background-color:rgba(70,160,174,0.5);
+}

@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+$usu=$_SESSION['usu_reg'][0];
 require_once 'class/incidencia.php';
 $vista = 'view/home_cliente.php';
 $vista_header= 'view/header.php';
@@ -24,7 +25,22 @@ if (isset($_POST['Crear_incidencia'])) {
                  VALUES ("'.$mensaje.'","'.$asunto.'","'.$priority.'","'.$estado.'","'.$user.'","'.$error_tipo.'","'.$fecha_actual.'")';
                 
                  if ($conn->query($sql) === TRUE) {
-                 	header('Location: incidencias_cliente.php');
+                 	if (!empty($_POST['comentario'])) {
+						$coment =$_POST['comentario'];
+						$conn = new mysqli('localhost', 'root', '','incidencias');
+						$sql1 = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` where `asunto` ='$asunto'";
+						$resultado=$conn->query($sql1);
+						$fila=$resultado->fetch_array();
+						$inc =new incidencia();
+						$inc->setid($fila[0]);
+						$id_usu=$inc->getid();
+						$sql = 'INSERT INTO `comentario`(`texto`, `visibilidad_id`, `incidencia_id`, `usuario_id`) VALUES ("'.$coment.'","1","'.$id_usu.'","'.$usu.'")';
+						$conn->query($sql);
+						header('Location: incidencias_cliente.php');
+					}else{
+						header('Location: incidencias_cliente.php');
+					}
+                 	
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
@@ -40,6 +56,7 @@ if (isset($_POST['Crear_incidencia'])) {
 	}else{
 		$err_asunto= "Asunto no puede estar vacio";
 	}
+	
 }else{
 	
 }

@@ -18,15 +18,15 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id` where `incidencia`.`reportador_usuario_id` ='$user'";
+    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id` join`error` ON `incidencia`.`error_id`=`error`.`id` where `incidencia`.`reportador_usuario_id` ='$user'";
 
     $resultado=$conn->query($sql);
    
     $nfilas = $resultado->num_rows;
 
-    $conn->close();
+    $conn->close(); 
  
-   //join`usuario` ON `incidencia`.`asignado_usuario_id`=`usuario`.`id`
+   //join`usuario` ON `incidencia`.`asignado_usuario_id`=`usuario`.`id` join`usuario` ON `incidencia`.`asignado_usuario_id`=`usuario`.IS NULL
   if ($resultado){
         
                 
@@ -43,8 +43,9 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                                 <th id='t_prioridad'>prioridad</th>
                                 <th id='t_estado'>estado</th>
                                 <th id='t_assingacion'>assignado</th>
+                                <th id='t_prioridad'>error</th>
                                 <th id='t_fecha'>fecha</th>
-                                <th id='t_comentario'>Comentario</th>
+                                <th id='t_comentario'>Chat</th>
                             </tr>";
                 for ($i=0; $i<$nfilas; $i++){
                     $fila=$resultado->fetch_array();
@@ -57,6 +58,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                     $inc-> setrestado($fila[10]);
                     $inc-> setassignado($fila[5]);
                     $inc-> setreportado($fila[6]);
+                    $inc-> seterror($fila[14]);
                     $inc-> setfecha($fila[8]);
                     $id=$inc -> getid();
                  echo " <tr>
@@ -65,6 +67,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                             <td id='t_prioridad'>".$inc -> getprioridad()."</td>
                             <td id='t_estado'>".$inc-> getestado()."</td>
                             <td id='t_assingacion'>".$inc-> getassignado()."</td>
+                            <td id='t_prioridad'>".$inc -> geterror()."</td>
                             <td id='t_fecha'>".$inc->  getfecha()."</td>
                             <td t_comentario>"."<form action='ver_comentarios.php' method='post'>"."<input type='submit' name='comentarios' value='$id' id='chat'>"."</form>"."</td>
                         </tr>";

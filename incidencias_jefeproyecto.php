@@ -18,7 +18,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id`";
+    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id` join`error` ON `incidencia`.`error_id`=`error`.`id`";
 
     $resultado=$conn->query($sql);
     
@@ -43,29 +43,31 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                                 <th id='t_prioridad'>prioridad</th>
                                 <th id='t_estado'>estado</th>
                                 <th id='t_assingacion'>assignado</th>
+                                <th id='t_prioridad'>error</th>
                                 <th id='t_fecha'>fecha</th>
-                                <th id='t_comentario'>Comentario</th>
+                                <th id='t_comentario'>Chat</th>
                             </tr>";
                 for ($i=0; $i<$nfilas; $i++){
-                 $fila=$resultado->fetch_array();
-                 $inc = new Incidencia();
-            
-            $inc -> setid($fila[0]);
-            $inc -> setdescription($fila[1]);
-            $inc -> setassunto($fila[2]);
-            $inc -> setprioridad($fila[11]);
-            $inc-> setrestado($fila[9]);
-            $inc-> setassignado($fila[5]);
-            $inc-> setreportado($fila[6]);
-            $inc-> setfecha($fila[7]);
-            $id=$inc -> getid();   
-
-                echo " <tr>
+                    $fila=$resultado->fetch_array();
+                    //echo '<pre>' . var_export($fila, true) . '</pre>';
+                    $inc = new Incidencia();
+                    $inc -> setid($fila[0]);
+                    $inc -> setdescription($fila[1]);
+                    $inc -> setassunto($fila[2]);
+                    $inc -> setprioridad($fila[12]);
+                    $inc-> setrestado($fila[10]);
+                    $inc-> setassignado($fila[5]);
+                    $inc-> setreportado($fila[6]);
+                    $inc-> seterror($fila[14]);
+                    $inc-> setfecha($fila[8]);
+                    $id=$inc -> getid();
+                 echo " <tr>
                             <td id='t_id'>".$id."</td>
                             <td id='t_asunto'>".$inc -> getasunto()."</td>
                             <td id='t_prioridad'>".$inc -> getprioridad()."</td>
                             <td id='t_estado'>".$inc-> getestado()."</td>
                             <td id='t_assingacion'>".$inc-> getassignado()."</td>
+                            <td id='t_prioridad'>".$inc -> geterror()."</td>
                             <td id='t_fecha'>".$inc->  getfecha()."</td>
                             <td t_comentario>"."<form action='ver_comentarios.php' method='post'>"."<input type='submit' name='comentarios' value='$id' id='chat'>"."</form>"."</td>
                         </tr>";

@@ -18,7 +18,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` WHERE  `asignado_usuario_id` IS NULL";
+    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id`WHERE  `asignado_usuario_id` IS NULL ORDER BY `incidencia`.`prioridad_id` ASC,`incidencia`.`fecha`" ;
 
     $resultado=$conn->query($sql);
     
@@ -33,33 +33,36 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             if ($nfilas > 0){
              echo "
                     <table  id='cerrar_inc_cliente' >
-                        <tr>
-                            <th id='cliente_id'>id</th>
-                            <th>asunto</th>
-                            <th id='cliente_est'>estado</th>
-                            <th>fecha</th>
-                             <th>Cerrar</th>
-                        </tr>";
+        <tr>
+            <th id='t_cerrar_id'>id</th>
+            <th id='t_cerrar_asunto'>asunto</th>
+            <th id='t_cliente_est'>estado</th>
+            <th id='t_cliente_est'>prioridad</th>
+            <th id='t_cerrar_fecha'>fecha</th>
+            <th id='t_cerrar_cerrar'>Cerrar</th>
+        </tr>";
                 for ($i=0; $i<$nfilas; $i++){
                  $fila=$resultado->fetch_array();
                  $inc = new Incidencia();
-
+		//echo '<pre>' . var_export($fila, true) . '</pre>';
             $inc -> setid($fila[0]);
             $inc -> setdescription($fila[1]);
             $inc -> setassunto($fila[2]);
-            $inc -> setprioridad($fila[3]);
-            $inc-> setrestado($fila[4]);
+            $inc -> setprioridad($fila[12]);
+            $inc-> setrestado($fila[10]);
             $inc-> setassignado($fila[5]);
             $inc-> setreportado($fila[6]);
-            $inc-> setfecha($fila[7]);
+             $inc-> seterror($fila[7]);
+            $inc-> setfecha($fila[8]);
                
             $prueba = $inc -> getid();
                  echo " <tr>
-                            <td id='cliente_id'>".$inc -> getid()."</td>
-                            <td>".$inc -> getasunto()."</td>
-                            <td id='cliente_est'>".$inc-> getestado()."</td>
-                            <td>".$inc-> getfecha()."</td>
-                            <td>"."<form action='' method='post'>"."<input type='submit' name='close_incidencia' id='close_inc' value='$prueba'>"."</form>"."</td>
+                            <td id='t_cerrar_id'>".$inc -> getid()."</td>
+                            <td id='t_cerrar_asunto'>".$inc -> getasunto()."</td>
+                            <td id='t_cliente_est'>".$inc-> getestado()."</td>
+                            <td id='t_cliente_est'>".$inc-> getprioridad()."</td>
+                            <td id='t_cerrar_fecha'>".$inc-> getfecha()."</td>
+                            <td id='t_cerrar_cerrar'>"."<form action='' method='post'>"."<input type='submit' name='close_incidencia' id='close_inc' value='$prueba'>"."</form>"."</td>
                         </tr>";
                 }
                 echo "</table>";
@@ -141,7 +144,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 
             		$conn->close();
         			}?>
-        			<input type="submit" name="assignado_p">
+                    <div id="mas_comentario">
+                    <label>añadir algun comentario</label><br>
+                    <textarea name="comentario"></textarea><br>
+                    </div>
+        			<input type="submit" name="assignado_p" value="Assignar">
 		</div>
 	</form>
 		<?php 
@@ -160,7 +167,15 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 						$Res=$conn->query($sql);
                         $Res1=$conn->query($sql1);
 						if ($Res==true && $Res1==true) {
-                            
+                            if (!empty($_POST['comentario'])) {
+                                $coment =$_POST['comentario'];
+                                $conn = new mysqli('localhost', 'root', '','incidencias');
+                                $sql = 'INSERT INTO `comentario`(`texto`, `visibilidad_id`, `incidencia_id`, `usuario_id`) VALUES ("'.$coment.'","2","'.$id.'","'.$user.'")';
+                                $conn->query($sql);
+                                header('Location: incidencias_jefeproyecto.php');
+                            }else{
+                                    header('Location: incidencias_jefeproyecto.php');
+                                }
 							
 						}else{echo "aqui pasa algo";}
 				}else{

@@ -5,7 +5,7 @@
     require_once 'class/TipoError.php';
 ?>
 <link rel="stylesheet" type="text/css" href="style.css">
-
+<div id="wrap_crearinc">
 <form action="" method="post">
 	<table>
 		<tr>
@@ -78,7 +78,7 @@
 		<tr>
 			<td>Nota interna</td>
 			<td>
-				<textarea placeholder="max 140 caracteres">
+				<textarea  name="comentario" placeholder="max 140 caracteres">
 					
 				</textarea>
 			</td>
@@ -88,3 +88,4 @@
 		</tr>
 	</table>
 </form>
+</div>
