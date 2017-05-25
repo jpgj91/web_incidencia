@@ -7,6 +7,16 @@
 	$vista_footer= 'view/footer.php';
 	require_once 'class/Incidencia.php';
 	require_once $vista_header;
+	 if(isset($_SESSION['usu_reg'])){
+        if ($_SESSION['usu_reg'][4]==3) {}
+            else{
+                if ($_SESSION['usu_reg'][4]==1) {header("Location:incidencias_cliente.php");}
+                 if ($_SESSION['usu_reg'][4]==2) {header("Location:incidencias_jefeproyecto.php");}
+            }
+            }
+        else{
+        header("Location:home.php");
+    }
 ?>
 <link rel="stylesheet" type="text/css" href="style.css">
 	<div id="wrap_tabla">
@@ -17,7 +27,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` where `asignado_usuario_id` ='$user'";
+    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` where `asignado_usuario_id` ='$user'";
 
     $resultado=$conn->query($sql);
     
@@ -33,32 +43,32 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             	   echo "
         <table  id='cerrar_inc_cliente' >
         <tr>
-            <th id='cliente_id'>id</th>
-            <th>asunto</th>
+            <th id='t_cerrar_id'>id</th>
+            <th id='t_cerrar_asunto'>asunto</th>
             <th id='cliente_est'>estado</th>
-            <th>fecha</th>
-            <th>Cerrar</th>
+            <th id='t_cerrar_fecha'>fecha</th>
+            <th id='t_cerrar_cerrar'>Cerrar</th>
         </tr>";
                 for ($i=0; $i<$nfilas; $i++){
                  $fila=$resultado->fetch_array();
                  $inc = new Incidencia();
-
+			//echo '<pre>' . var_export($fila, true) . '</pre>';
             $inc -> setid($fila[0]);
             $inc -> setdescription($fila[1]);
             $inc -> setassunto($fila[2]);
             $inc -> setprioridad($fila[3]);
-            $inc-> setrestado($fila[4]);
+            $inc-> setrestado($fila[10]);
             $inc-> setassignado($fila[5]);
             $inc-> setreportado($fila[6]);
             $inc-> setfecha($fila[7]);
                
             $prueba = $inc -> getid();
                  echo " <tr>
-                            <td id='cliente_id'>".$inc -> getid()."</td>
-                            <td>".$inc -> getasunto()."</td>
-                            <td id='cliente_est'>".$inc-> getestado()."</td>
-                            <td>".$inc-> getfecha()."</td>
-                            <td>"."<form action='' method='post'>"."<input type='submit' name='close_incidencia' id='close_inc' value='$prueba'>"."</form>"."</td>
+                            <td id='t_cerrar_id'>".$inc -> getid()."</td>
+                            <td id='t_cerrar_asunto'>".$inc -> getasunto()."</td>
+                            <td id='t_cerrar_fecha'>".$inc-> getestado()."</td>
+                            <td id='t_cerrar_fecha'>".$inc-> getfecha()."</td>
+                            <td id='t_cerrar_cerrar'>"."<form action='' method='post'>"."<input type='submit' name='close_incidencia' id='close_inc' value='$prueba'>"."</form>"."</td>
                         </tr>";
                 }
                 echo "</table>";
@@ -78,7 +88,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
            
 	</div>
 	<?php 
-		var_dump($_POST['close_incidencia']);
+		
 	if (isset($_POST['close_incidencia'])) {
 			$id= $_POST['close_incidencia'];
 			
@@ -107,6 +117,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 	<div id="wrap_form_Cerrar">
 		<form action="" method="post">
 			<table>
+				<h3>Revisar Incidencia</h3>
 				<tr>
 					<td>Nombre</td>
 					<td><?php echo "<input type='text' name='nombre' value='$nom' readonly>" ;?></td>
@@ -141,9 +152,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 				</td>
 				</tr>
 				<tr>
-					<td><input type="submit" name="Cerrar_incidencia" value="Enviar Revision"></td>
+					
 				</tr>
+				
 			</table>
+			<input type="submit" name="Cerrar_incidencia" value="Enviar Revision" id="button_cerrar">
 		</div>
 	</form>
 		<?php 
@@ -151,12 +164,11 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 		
 		}
 		   if (isset($_POST['Cerrar_incidencia'])) {
-		   	var_dump($_POST);
 			$id = (int)$_POST['id_usu'];
 			$conn = new mysqli('localhost', 'root', '','incidencias');
 				$sql ="UPDATE `incidencia` SET `estado_id`=3 WHERE`id`=$id";
 						$Res=$conn->query($sql);
-						var_dump($Res);
+						
 						if ($Res==true) {
 							if (!empty($_POST['comentario'])) {
 								$coment =$_POST['comentario'];

@@ -7,6 +7,17 @@
 	$vista_footer= 'view/footer.php';
 	require_once 'class/Incidencia.php';
 	require_once $vista_header;
+	/*codigo para que no entren en esta pagina si no eres el usuario indicado*/
+	if(isset($_SESSION['usu_reg'])){
+        if ($_SESSION['usu_reg'][4]==1) {}
+            else{
+                if ($_SESSION['usu_reg'][4]==2) {header("Location:incidencias_jefeproyecto.php");}
+                 if ($_SESSION['usu_reg'][4]==3) {header("Location:incidencias_programador.php");}
+            }
+            }
+        else{
+        header("Location:home.php");
+    }
 ?>
 <link rel="stylesheet" type="text/css" href="style.css">
 	<div id="wrap_tabla">

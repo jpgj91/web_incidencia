@@ -7,31 +7,36 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <div id="wrap_crearinc">
 <form action="" method="post">
-	<table>
+	<table id="table_crear">
+		<thead>
+			<tr>
+			<td id="txt_titulo"><h2>INCIDENCIA</h2></td>
+			</tr>
+		</thead>
 		<tr>
-			<td>Nombre</td>
+			<td id="txt">Nombre</td>
 			<td><?php echo "$nom" ;?></td>
 		</tr>
 		<tr>
-			<td>Asunto</td>
-			<td><input type="text" name="asunto"></td>
-			<td><span><?php echo (isset($err_asunto)) ? $err_asunto : '';?></span></td>
+			<td id="txt">Asunto</td>
+			<td><input type="text" name="asunto" id="asunto_txt"></td>
+			<td><span class="error"><?php echo (isset($err_asunto)) ? $err_asunto : '';?></span></td>
 		</tr>
 		<tr>
-			<td>Email</td>
+			<td id="txt">Email</td>
 			<td><?php echo "$mail" ;?></td>
 		</tr>
 		<tr>
-			<td>Prioridad</td>
+			<td id="txt">Prioridad</td>
 			<td>
 				<input type="radio" name="prioridad" value="1"> Alta<br>
   				<input type="radio" name="prioridad" value="2"> media<br>
   				<input type="radio" name="prioridad" value="3"> baja<br><br>
 			</td>
-			<td><span><?php  echo (isset($err_prioridad)) ? $err_prioridad : '';?></span></td>
+			<td><span class="error"><?php  echo (isset($err_prioridad)) ? $err_prioridad : '';?></span></td>
 		</tr>
 		<tr>
-			<td>Tipo Error</td>
+			<td id="txt">Tipo Error</td>
 			<td><?php 
 			$conn = new mysqli('localhost', 'root', '','incidencias');
         $sql = "SELECT * FROM `error`";
@@ -65,26 +70,27 @@
             $conn->close();?>
 
 			</td>
-			<td><span><?php echo (isset($err_tipo)) ? $err_tipo : '';?></span></td>
+			<td><span class="error"><?php echo (isset($err_tipo)) ? $err_tipo : '';?></span></td>
 		</tr>
 		<tr>
-			<td>Descripccion</td>
+			<td id="txt">Descripccion</td>
 			<td>
-				<textarea name="descripccion">
+				<textarea rows="4" cols="50" name="descripccion">
 					
 				</textarea>
 			</td>
 		</tr>
 		<tr>
-			<td>Nota interna</td>
+			<td >Nota interna</td>
 			<td>
-				<textarea  name="comentario" placeholder="max 140 caracteres">
+				<textarea  rows="4" cols="50"name="comentario" placeholder="max 140 caracteres">
 					
 				</textarea>
 			</td>
 		</tr>
 		<tr>
-			<td><input type="submit" name="Crear_incidencia" value="Crear Incidencia"></td>
+			<td></td>
+			<td><input type="submit" name="Crear_incidencia" class="btn_crear" value="Crear Incidencia"></td>
 		</tr>
 	</table>
 </form>
