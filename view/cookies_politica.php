@@ -36,13 +36,20 @@ function setCookie(c_name,value,exdays){
     var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
     document.cookie=c_name + "=" + c_value;
 }
- 
-if(getCookie('tiendaaviso')!="1"){
-    document.getElementById("barraaceptacion").style.display="block";
-}
+  
+
 function PonerCookie(){
+   
     setCookie('tiendaaviso','1',365);
+    var x =getCookie('tiendaaviso');
     document.getElementById("barraaceptacion").style.display="none";
+    
 }
+if(getCookie('tiendaaviso')!=="1"){
+    document.getElementById("barraaceptacion").style.display="block";
+    }else{
+        document.getElementById("barraaceptacion").style.display="none";
+    }
+    
 </script>
 <!--//FIN BLOQUE COOKIES-->

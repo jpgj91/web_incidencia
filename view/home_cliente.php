@@ -14,29 +14,43 @@
 			</tr>
 		</thead>
 		<tr>
-			<td id="txt">Nombre</td>
+			<td id="txt">Nombre :</td>
 			<td><?php echo "$nom" ;?></td>
 		</tr>
 		<tr>
-			<td id="txt">Asunto</td>
+			<td id="txt">Asunto :</td>
 			<td><input type="text" name="asunto" id="asunto_txt"></td>
 			<td><span class="error"><?php echo (isset($err_asunto)) ? $err_asunto : '';?></span></td>
 		</tr>
 		<tr>
-			<td id="txt">Email</td>
+			<td id="txt">Email :</td>
 			<td><?php echo "$mail" ;?></td>
 		</tr>
 		<tr>
-			<td id="txt">Prioridad</td>
+			<td id="txt">Prioridad :</td>
 			<td>
-				<input type="radio" name="prioridad" value="1"> Alta<br>
-  				<input type="radio" name="prioridad" value="2"> media<br>
-  				<input type="radio" name="prioridad" value="3"> baja<br><br>
+				<!--input type="radio" name="prioridad" value="1" id="rd_prioridad"> Alta<br>
+  				<input type="radio" name="prioridad" value="2" id="rd_prioridad"> media<br>
+  				<input type="radio" name="prioridad" value="3" id="rd_prioridad"> baja<br><br-->
+  				<div id="prueba_id">
+  					<div id="prueba_2">
+						<input type="radio" name="prioridad" value="1"" id="radio1" class="radio" />
+						<label for="radio1" id="lab_prioridad">Alta</label>
+					</div>
+					<div id="prueba_2">
+						<input type="radio" name="prioridad" value="2" id="radio2" class="radio"/>
+						<label for="radio2" id="lab_prioridad">media</label>
+					</div>
+					<div id="prueba_2">	
+						<input type="radio" name="prioridad" value="3" id="radio3" class="radio"/>
+						<label for="radio3" id="lab_prioridad">baja</label>
+					</div>	
+				</div>
 			</td>
 			<td><span class="error"><?php  echo (isset($err_prioridad)) ? $err_prioridad : '';?></span></td>
 		</tr>
 		<tr>
-			<td id="txt">Tipo Error</td>
+			<td id="txt">Tipo Error :</td>
 			<td><?php 
 			$conn = new mysqli('localhost', 'root', '','incidencias');
         $sql = "SELECT * FROM `error`";
@@ -44,7 +58,7 @@
         $nfilas = $resultado->num_rows;
         if ($resultado){
 
-        	 echo"<select name='t_err'>
+        	 echo"<select name='t_err' id='error_select' class='soflow'>
         	 	  <option value='seleccione'>seleccione</option>
         	 ";
             if ($nfilas > 0){
@@ -73,7 +87,7 @@
 			<td><span class="error"><?php echo (isset($err_tipo)) ? $err_tipo : '';?></span></td>
 		</tr>
 		<tr>
-			<td id="txt">Descripccion</td>
+			<td id="txt">Descripción :</td>
 			<td>
 				<textarea rows="4" cols="50" name="descripccion">
 					
@@ -81,7 +95,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td >Nota interna</td>
+			<td >Nota interna : </td>
 			<td>
 				<textarea  rows="4" cols="50"name="comentario" placeholder="max 140 caracteres">
 					

@@ -205,6 +205,7 @@ INSERT INTO `estado`(`name`) VALUES ('en epera(assignacion)');
 INSERT INTO `estado`(`name`) VALUES ('en proceso(revision)');
 INSERT INTO `estado`(`name`) VALUES ('revisado(programador)');
 INSERT INTO `estado`(`name`) VALUES ('pendiente(cliente)');
+INSERT INTO `estado`(`name`) VALUES ('Rechazada');
 INSERT INTO `estado`(`name`) VALUES ('cerrado');
 -- -----------------------------------------------------
 -- Table `prioridad`
@@ -231,7 +232,7 @@ INSERT INTO `error`(`name`) VALUES ("otro");
 -- -----------------------------------------------------
 
 INSERT INTO `visibilidad`(`tipo`) VALUES ("publico");
-INSERT INTO `visibilidad`(`tipo`) VALUES ("privado")
+INSERT INTO `visibilidad`(`tipo`) VALUES ("privado");
 -- -----------------------------------------------------
 -- Table `rol_has_visibilidad`
 -- -----------------------------------------------------

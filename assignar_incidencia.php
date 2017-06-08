@@ -30,7 +30,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
     die("Connection failed: " . $mysqli->connect_error);
 	}
 	
-    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id`WHERE  `asignado_usuario_id` IS NULL ORDER BY `incidencia`.`prioridad_id` ASC,`incidencia`.`fecha`" ;
+    $sql = "SELECT * FROM `incidencia` join`estado` ON `incidencia`.`estado_id`=`estado`.`id` join`prioridad` ON `incidencia`.`prioridad_id`=`prioridad`.`id` WHERE  `asignado_usuario_id` IS NULL and `estado_id`=1 ORDER BY `incidencia`.`prioridad_id` ASC,`incidencia`.`fecha`" ;
 
     $resultado=$conn->query($sql);
     
@@ -46,12 +46,12 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
              echo "
                     <table  id='cerrar_inc_cliente' >
         <tr>
-            <th id='t_cerrar_id'>id</th>
-            <th id='t_cerrar_asunto'>asunto</th>
-            <th id='t_cliente_est'>estado</th>
-            <th id='t_cliente_est'>prioridad</th>
-            <th id='t_cerrar_fecha'>fecha</th>
-            <th id='t_cerrar_cerrar'>Cerrar</th>
+            <th id='t_cerrar_id'>Id</th>
+            <th id='t_cerrar_asunto'>Asunto</th>
+            <th id='t_cliente_est'>Estado</th>
+            <th id='t_cliente_est'>Prioridad</th>
+            <th id='t_cerrar_fecha'>Fecha</th>
+            <th id='t_cerrar_cerrar'>Asignar</th>
         </tr>";
                 for ($i=0; $i<$nfilas; $i++){
                  $fila=$resultado->fetch_array();
@@ -64,7 +64,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
             $inc-> setrestado($fila[10]);
             $inc-> setassignado($fila[5]);
             $inc-> setreportado($fila[6]);
-             $inc-> seterror($fila[7]);
+            $inc-> seterror($fila[7]);
             $inc-> setfecha($fila[8]);
                
             $prueba = $inc -> getid();
@@ -123,7 +123,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 	<div id="wrap_form_Cerrar">
 		<form action="" method="post">
 			
-					<p>Seleccione un programador</p>
+					<h2 id="asig_titul">Seleccione un programador</h2>
 					<?php echo "<input type='hidden' name='id_usu' value='$id' readonly>" ;?>
 					<?php
        						$conn = new mysqli('localhost', 'root', '','incidencias');
@@ -132,7 +132,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
         					$nfilas = $res->num_rows;
         						if ($res){
 
-
+                                 echo "<div id='programadores_list'>";       
             					if ($nfilas > 0){
                 					for ($i=0; $i<$nfilas; $i++){
                     				$fila=$res->fetch_array();
@@ -148,19 +148,28 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                     				$id_p=$usu_p->getid();
                     				$name_p=$usu_p->getname();
 
-                    			echo"<label><input type='radio' name='programador' value='$id_p'>".$name_p."</label>"."<br>";
+                    			echo"<input type='radio' name='programador' value='$id_p'>".$name_p."<br>";
                     			
                 			}
-
+                            echo "</div>";
             			}
 
             		$conn->close();
         			}?>
                     <div id="mas_comentario">
-                    <label>añadir algun comentario</label><br>
-                    <textarea name="comentario"></textarea><br>
+                    <h3 id="asig_titul_comt">Añadir  Comentario</h3>
+                    <textarea name="comentario" rows="4" cols="50"></textarea>
                     </div>
-        			<input type="submit" name="assignado_p" value="Assignar">
+        			<input type="submit" name="assignado_p" value="Asignar" class="btn_asignar">
+                    <hr>
+                    <div id="rechazo comentario">
+                    <h2 id="rechazar_titulo">Rechazar</h2>
+                    <h3 id="rechazar_titul_comt">Añadir Comentario</h3>
+                    <textarea name="rechazo_mens" rows="4" cols="50"></textarea>
+                    </div>
+                    <input type="submit" name="Rechazar" value="Rechazar" class="btn_rechazar">
+                    <span id="error"></span>
+                   
 		</div>
 	</form>
 		<?php 
@@ -171,7 +180,7 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
 		   
 
 			$id = (int)$_POST['id_usu'];
-			$valor = $_POST['programador'];
+			$valor = (isset($_POST['programador'])) ? $_POST['programador']   : null;;
 				if(!empty($valor)){
 						$conn = new mysqli('localhost', 'root', '','incidencias');
 						$sql ="UPDATE `incidencia` SET `asignado_usuario_id`=$valor WHERE`id`=$id";
@@ -186,17 +195,39 @@ $conn = new mysqli('localhost', 'root', '','incidencias');
                                 $conn->query($sql);
                                 header('Location: incidencias_jefeproyecto.php');
                             }else{
-                                    header('Location: incidencias_jefeproyecto.php');
+                                   
                                 }
 							
-						}else{echo "aqui pasa algo";}
+						}else{}
 				}else{
-					$error="falta seleccionar programador";
-					echo $error;
+                    echo '<script language="javascript">alert("falta seleccionar programador para asignar la Incidiencia: ");</script>'; 
+					//$error="falta seleccionar programador";
+					//echo $error;
 				}
+                header('Location: incidencias_jefeproyecto.php');
 			}
+            if (isset($_POST['Rechazar'])) {
+                $id = (int)$_POST['id_usu'];
+                if (!empty($_POST['rechazo_mens'])) {
+                $conn = new mysqli('localhost', 'root', '','incidencias');
+                $sql ="UPDATE `incidencia` SET `estado_id`=5 WHERE`id`=$id";
+                $result=$conn->query($sql);
+                 if ($result== true) {
+                    
+                        $msn =$_POST['rechazo_mens'];
+                        $conn = new mysqli('localhost', 'root', '','incidencias');
+                        $sql = 'INSERT INTO `comentario`(`texto`, `visibilidad_id`, `incidencia_id`, `usuario_id`) VALUES ("'.$msn.'","1","'.$id.'","'.$user.'")';
+                        $res=$conn->query($sql);
+                        header('Location: incidencias_jefeproyecto.php');
+                    }
+                }else{
+                         echo '<script language="javascript">alert("Debe poner un mensaje para rechazar la Incidiencia: ");</script>'; 
+                    }
+            }
+       
         ?>
 		
 <?php 
+
 require_once $vista_footer;
 ?>

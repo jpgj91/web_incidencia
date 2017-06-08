@@ -1,13 +1,16 @@
 <?php
+/*Clases necesarias*/
 require_once 'class/F_validar.php';
 require_once 'class/Usuario.php';
-    
+/*End class*/
+    /* vistas necesearias*/
     $vista_Login= 'view/home.php';
     $vista_header= 'view/header.php';
     $vista_footer= 'view/footer.php';
-
+    /*End vistas*/
 @session_start();
-if(isset($_POST['Logearse'])){
+/*logica para logearse y que funcione todo ok*/
+if(isset($_POST['Logearse'])){ // si pulsamos el boton logearse mirar que los campos sean correctos
         $email      = (isset($_POST['email'])) ? $_POST['email'] : null;
         $password   = (isset($_POST['pass'])) ? $_POST['pass']  : null;
 
@@ -15,16 +18,17 @@ if(isset($_POST['Logearse'])){
     $valido = new Validar;
 
 
-if($valido->validarLogin($email,$password)){
+if($valido->validarLogin($email,$password)){ // si campos mail y pasword son correctos
 
-    $pass=md5($password);
+    $pass=md5($password); // guardamos la pass y la encryptamos para ver si coincide con la que tenemos en la base de datos
     $conn = new mysqli('localhost', 'root', '','incidencias');
-    $sql = "SELECT * FROM `usuario` WHERE `email`='$email'";
+    $sql = "SELECT * FROM `usuario` WHERE `email`='$email'"; 
     $resultado=$conn->query($sql);
     $fila=$resultado->fetch_array();
   
-    if($fila[2]==$pass){
+    if($fila[2]==$pass){ // comparamos la pass obtenida de nuestra base de datos con la introducida por el usuario para ver si coinciden si no daremos un error 
 
+        /*instanciamos a la clase usuario para guardad lo obtenido por la query una vez que los campos sean correctos y coincidan con los de BD*/
         $loged = new Usuario();
         $loged->setid($fila[0]);
         $loged->setname($fila[1]);
@@ -62,7 +66,7 @@ if($valido->validarLogin($email,$password)){
 }
 
 }
-
+/*Llamamos a las vistas necesarias para cargar nuestra pagina*/
 require_once $vista_header;
 require_once $vista_Login;
 require_once $vista_footer;

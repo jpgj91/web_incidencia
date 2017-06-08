@@ -12,14 +12,15 @@
    
 ?>
 <link rel="stylesheet" type="text/css" href="style.css">
+<div id="wrap_chat">
 <h2>Comentarios</h2>
 <form action="" method="post">
 	
 			<?php
         $prueba=$_POST['comentarios'];
- 
+      
 			$conn = new mysqli('localhost', 'root','','incidencias');
-        $sql = "SELECT comm.texto,comm.usuario_id,incidencias.usuario.name
+        $sql = "SELECT comm.texto,comm.usuario_id,incidencias.usuario.name,incidencias.usuario.rol_id
 				FROM incidencias.comentario AS comm
  				JOIN incidencias.usuario ON incidencias.usuario.id = comm.usuario_id
 				WHERE comm.incidencia_id = $prueba AND
@@ -38,14 +39,41 @@
 
         if ($resultado){
 
-        	 
-       
+        	 ?>
+           <div id="chat">
+       <?php  
             if ($nfilas > 0){
                 for ($i=0; $i<$nfilas; $i++){
                   $fila=$resultado->fetch_array();
+                   $arr= [
+                        1=>[
+                          "Chat"=>"titulo_chat",
+                          "Chat_Nombre"=>"txt_chat_titulo",
+                          "Texto"=>"texto_chat",
+                          "Texto_contenido"=>"txt_texto"
+                        ],
+                        2=>[
+                        "Chat"=>"titulo_chat_jefe",
+                          "Chat_Nombre"=>"txt_chat_titulo_jefe",
+                          "Texto"=>"texto_chat_jefe",
+                          "Texto_contenido"=>"txt_texto_jefe"
+                          
+                        ],
+                        3=>[
+                          "Chat"=>"titulo_chat_programador",
+                          "Chat_Nombre"=>"txt_chat_titulo_programador",
+                          "Texto"=>"texto_chat_programador",
+                          "Texto_contenido"=>"txt_texto_programador"
+                        ]
+                   ];
+                   //var_dump($fila);
                    //echo '<pre>' . var_export($fila, true) . '</pre>';
-                    echo"<labale>$fila[2]</label>";
-                    echo"<p>$fila[0]</p>";
+                    echo"<div id=".$arr[$fila['rol_id']]['Chat'].">
+                      <span id=".$arr[$fila['rol_id']]['Chat_Nombre'].">$fila[2]</span>
+                      </div>";
+                    echo"<div id=".$arr[$fila['rol_id']]['Texto'].">
+                    <span id=".$arr[$fila['rol_id']]['Texto_contenido'].">$fila[0]</span>
+                    </div>";
 
                  	
 
@@ -56,7 +84,9 @@
             $conn->close();
 
             ?>
+          </div>
 </form>
+</div>
 <?php 
 require_once $vista_footer;
 ?>
